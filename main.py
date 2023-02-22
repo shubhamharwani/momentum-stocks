@@ -42,6 +42,9 @@ universe_button = st.radio('Select Universe',('Nifty 50','Nifty Next 50','Nifty 
                                               'Nifty 500','Nifty Micro Cap 250'))
 st.write('Please have patience as downloading and calculating the data takes time.')
 
+stocks = st.number_input('Number Of Stocks',1,1000,20)
+allocation = st.number_input('Allocation In Each Stock (in ₹)',1,1000000,5000)
+
 if universe_button == 'Nifty 50':
     tickers_list = universe(NIFTY_50)
 
@@ -104,10 +107,21 @@ pct_change = pct_change.sort_values(ascending=False)
 df2 = pd.DataFrame()
 df2['% / Rank'] = pct_change
 df2['LTP'] = round(end_value,2)
+df2['Qty'] = round(allocation/df2['LTP'])
+df2 = df2.head(stocks)
 
 # plot
-st.subheader('List of Top 20 Stocks in Momentum Over Last 1 Year')
-st.dataframe(df2.head(20),width=500,height=750)
+st.subheader(f'List of Top {stocks} Stocks in Momentum Over Last 1 Year')
+st.dataframe(df2,width=500,height=950)
+
+
+# function to convert and download the uploaded data as a csv file
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+    
+
+file = convert_df(df2)
+st.download_button('Download List in CSV',file,'data.csv')
 
 # extra information
 st.write('You can read about the stock universe at [NSE](https://www.nseindia.com/products-services/indices-broad-market)')
