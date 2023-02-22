@@ -7,40 +7,83 @@ import streamlit as st
 
 st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':bar_chart:')
 
-# NIFTY 50 STOCKS
-nifty_50 = pd.read_csv(r'https://archives.nseindia.com/content/indices/ind_nifty50list.csv')
-nifty_50 = nifty_50['Symbol'] + '.NS'
-nifty_50_list = nifty_50.to_list()
+NIFTY_50 = r'https://archives.nseindia.com/content/indices/ind_nifty50list.csv'
+NIFTY_NEXT_50 = r'https://archives.nseindia.com/content/indices/ind_niftynext50list.csv'
 
-# NIFTY SMALL CAP 250 STOCKS
-nifty_250_sc = pd.read_csv(r'https://archives.nseindia.com/content/indices/ind_niftysmallcap250list.csv')
-nifty_250_sc = nifty_250_sc['Symbol'] + '.NS'
-nifty_250_sc_list = nifty_250_sc.to_list()
+NIFTY_100 = r'https://archives.nseindia.com/content/indices/ind_nifty100list.csv'
+NIFTY_200 = r'https://archives.nseindia.com/content/indices/ind_nifty200list.csv'
 
-# NIFTY SMALL + MID CAP STOCKS (MID 150 + SMALL 250)
-nifty_sml_400 = pd.read_csv(r'https://archives.nseindia.com/content/indices/ind_niftymidsmallcap400list.csv')
-nifty_sml_400 = nifty_sml_400['Symbol'] + '.NS'
-nifty_sml_400_list = nifty_sml_400.to_list()
+NIFTY_MIDCAP_50 = r'https://archives.nseindia.com/content/indices/ind_niftymidcap50list.csv'
+NIFTY_MIDCAP_100 = r'https://archives.nseindia.com/content/indices/ind_niftymidcap100list.csv'
+NIFTY_MIDCAP_150 = r'https://archives.nseindia.com/content/indices/ind_niftymidcap150list.csv'
 
-# NIFTY TOP 500 STOCKS (NIFTY 50 + NIFTY NEXT 50 + NIFTY MID CAP 150 + NIFTY SMALL CAP 250)
-nifty_500 = pd.read_csv(r'https://archives.nseindia.com/content/indices/ind_nifty500list.csv')
-nifty_500 = nifty_500['Symbol'] + '.NS'
-nifty_500_list = nifty_500.to_list()
+NIFTY_SMALLCAP_50 = r'https://archives.nseindia.com/content/indices/ind_niftysmallcap50list.csv'
+NIFTY_SMALLCAP_100 = r'https://archives.nseindia.com/content/indices/ind_niftysmallcap100list.csv'
+NIFTY_SMALLCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftysmallcap250list.csv'
 
-universe_button = st.radio('Select Universe',('Nifty 50','Nifty Small Cap 250','Nifty Mid+Small 400','Nifty 500'))
+NIFTY_LARGEMIDCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftylargemidcap250list.csv'
+NIFTY_MIDSMALLCAP_400 = r'https://archives.nseindia.com/content/indices/ind_niftymidsmallcap400list.csv'
+
+NIFTY_500 = r'https://archives.nseindia.com/content/indices/ind_nifty500list.csv'
+NIFTY_MICROCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftymicrocap250_list.csv'
+
+# definition to download the stock universe list
+def universe(link):
+    universe = pd.read_csv(link)
+    universe = universe['Symbol'] + '.NS'
+    universe = universe.to_list()
+    return universe
+
+# radio button to select universe
+universe_button = st.radio('Select Universe',('Nifty 50','Nifty Next 50','Nifty 100','Nifty 200',
+                                              'Nifty Midcap 50','Nifty Midcap 100','Nifty Midcap 150',
+                                              'Nifty Small Cap 50','Nifty Small Cap 100','Nifty Small Cap 250',
+                                              'Nifty Large Mid Cap 250','Nifty Mid Small Cap 400',
+                                              'Nifty 500','Nifty Micro Cap 250'))
 st.write('Please have patience as downloading and calculating the data takes time.')
 
 if universe_button == 'Nifty 50':
-    tickers_list = nifty_50_list
+    tickers_list = universe(NIFTY_50)
+
+if universe_button == 'Nifty Next 50':
+    tickers_list = universe(NIFTY_NEXT_50)
+
+if universe_button == 'Nifty 100':
+    tickers_list = universe(NIFTY_100)
+
+if universe_button == 'Nifty 200':
+    tickers_list = universe(NIFTY_200)
+
+if universe_button == 'Nifty Midcap 50':
+    tickers_list = universe(NIFTY_MIDCAP_50)
+
+if universe_button == 'Nifty Midcap 100':
+    tickers_list = universe(NIFTY_MIDCAP_100)
+
+if universe_button == 'Nifty Midcap 150':
+    tickers_list = universe(NIFTY_MIDCAP_150)
+
+if universe_button == 'Nifty Small Cap 50':
+    tickers_list = universe(NIFTY_SMALLCAP_50)
+
+if universe_button == 'Nifty Small Cap 100':
+    tickers_list = universe(NIFTY_SMALLCAP_100)
 
 if universe_button == 'Nifty Small Cap 250':
-    tickers_list = nifty_250_sc_list
+    tickers_list = universe(NIFTY_SMALLCAP_250)
 
-if universe_button == 'Nifty Mid+Small 400':
-    tickers_list = nifty_sml_400_list
+if universe_button == 'Nifty Large Mid Cap 250':
+    tickers_list = universe(NIFTY_LARGEMIDCAP_250)
+
+if universe_button == 'Nifty Mid Small Cap 400':
+    tickers_list = universe(NIFTY_MIDSMALLCAP_400)
 
 if universe_button == 'Nifty 500':
-    tickers_list = nifty_500_list
+    tickers_list = universe(NIFTY_500)
+
+if universe_button == 'Nifty Micro Cap 250':
+    tickers_list = universe(NIFTY_MICROCAP_250)
+
 
 with st.spinner('Please wait.'):
     df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
@@ -59,6 +102,17 @@ pct_change = pct_change.sort_values(ascending=False)
 st.subheader('List of Top 20 Stocks in Momentum Over Last 1 Year')
 st.write('Left Column: Stock Name, Right Column : Rank in % Returns')
 st.dataframe(pct_change.head(20),width=500,height=750)
+
+st.write('You can read about the stock universe at [NSE](https://www.nseindia.com/products-services/indices-broad-market)')
+
+exp = {'Nifty 50':'1 - 50','Nifty Next 50':'51 - 100','Nifty 100':'1-100','Nifty 200':'1-200',
+       'Nifty Midcap 50':'101 - 150','Nifty Midcap 100':'101 - 200','Nifty Midcap 150':'101 - 250',
+       'Nifty Small Cap 50':'251 - 300','Nifty Small Cap 100':'251 - 350','Nifty Small Cap 250':'251 - 500',
+       'Nifty Large Mid Cap 250':'1 - 250 (Nifty50 + Nifty Next 50 + Nifty Midcap 150)','Nifty Mid Small Cap 400':'101 - 500 (Nifty Midcap 150 + Nifty Small Cap 250)',
+       'Nifty 500': '1 - 500','Nifty Microcap 250':'501 - 750'}
+
+exp_df = pd.DataFrame(exp.items(),columns=['Index','Positioning'])
+st.table(exp_df)
 
 #this is the css code to hide main menu button, stream logo at the bottom, top header colored ribbon
 hide_st_style = """
