@@ -5,7 +5,7 @@ import time
 import datetime as dt
 import streamlit as st
 
-st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':bar_chart:')
+st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':zap:')
 
 NIFTY_50 = r'https://archives.nseindia.com/content/indices/ind_nifty50list.csv'
 NIFTY_NEXT_50 = r'https://archives.nseindia.com/content/indices/ind_niftynext50list.csv'
@@ -97,12 +97,19 @@ start_value = prices.iloc[0]
 end_value = prices.iloc[-1]
 
 pct_change = (end_value - start_value) / start_value * 100
+pct_change = round(pct_change,2)
 pct_change = pct_change.sort_values(ascending=False)
 
-st.subheader('List of Top 20 Stocks in Momentum Over Last 1 Year')
-st.write('Left Column: Stock Name, Right Column : Rank in % Returns')
-st.dataframe(pct_change.head(20),width=500,height=750)
+# create blank dataframe and insert yearly returns with LTP in it
+df2 = pd.DataFrame()
+df2['% / Rank'] = pct_change
+df2['LTP'] = round(end_value,2)
 
+# plot
+st.subheader('List of Top 20 Stocks in Momentum Over Last 1 Year')
+st.dataframe(df2.head(20),width=500,height=750)
+
+# extra information
 st.write('You can read about the stock universe at [NSE](https://www.nseindia.com/products-services/indices-broad-market)')
 
 exp = {'Nifty 50':'1 - 50','Nifty Next 50':'51 - 100','Nifty 100':'1-100','Nifty 200':'1-200',
@@ -113,6 +120,18 @@ exp = {'Nifty 50':'1 - 50','Nifty Next 50':'51 - 100','Nifty 100':'1-100','Nifty
 
 exp_df = pd.DataFrame(exp.items(),columns=['Index','Positioning'])
 st.table(exp_df)
+
+# contact me button
+
+import streamlit.components.v1 as components
+
+tw1, tw2 = st.columns(2)
+with tw1:
+    st.subheader('Follow me on Twitter')
+    components.html('<a href="https://twitter.com/oyesindhi_?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @oyesindhi_</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>')
+with tw2:
+    st.subheader('Share on Twitter')
+    components.html('<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-text="Checkout this Backtesting Analyzer by @oyesindhi_" data-url="https://momentum-screener.streamlit.app/"data-show-count="false">"Share on Twitter</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>')
 
 #this is the css code to hide main menu button, stream logo at the bottom, top header colored ribbon
 hide_st_style = """
