@@ -46,19 +46,19 @@ with st.spinner('Please wait.'):
     df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
 
 # fetch prices & set date to datetime format
-prices = df['Adj Close']
+prices = df['Close']
 prices.index = pd.to_datetime(prices.index)
 
-# calculate monthly returns
-yearly_ret = prices.pct_change().resample('Y').agg(lambda x: (x+1).prod() - 1)
-yearly_ret = yearly_ret.T
+# calculate yearly returns
+start_value = prices.iloc[0]
+end_value = prices.iloc[-1]
 
-frame2 = yearly_ret['2023-12-31']
-frame2 = frame2.sort_values(ascending=False)
+pct_change = (end_value - start_value) / start_value * 100
+pct_change = pct_change.sort_values(ascending=False)
 
 st.subheader('List of Top 20 Stocks in Momentum Over Last 1 Year')
 st.write('Left Column: Stock Name, Right Column : Rank in % Returns')
-st.dataframe(frame2.head(20),width=500,height=750)
+st.dataframe(pct_change.head(20),width=500,height=750)
 
 #this is the css code to hide main menu button, stream logo at the bottom, top header colored ribbon
 hide_st_style = """
