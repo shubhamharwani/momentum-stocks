@@ -44,7 +44,6 @@ universe_button = st.radio('Select Universe',('Nifty 50','Nifty Next 50','Nifty 
 stocks = st.number_input('Number Of Stocks',1,1000,20)
 allocation = st.number_input('Allocation In Each Stock (in ₹)',1,1000000,5000)
 
-st.markdown('##')
 st.write('Please have patience. Downloading and calculating the data takes time.')
 
 if universe_button == 'Nifty 50':
