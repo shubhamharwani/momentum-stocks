@@ -40,10 +40,11 @@ universe_button = st.radio('Select Universe',('Nifty 50','Nifty Next 50','Nifty 
                                               'Nifty Small Cap 50','Nifty Small Cap 100','Nifty Small Cap 250',
                                               'Nifty Large Mid Cap 250','Nifty Mid Small Cap 400',
                                               'Nifty 500','Nifty Micro Cap 250'))
-st.write('Please have patience as downloading and calculating the data takes time.')
 
 stocks = st.number_input('Number Of Stocks',1,1000,20)
 allocation = st.number_input('Allocation In Each Stock (in ₹)',1,1000000,5000)
+
+st.write('Please have patience as downloading and calculating the data takes time.')
 
 if universe_button == 'Nifty 50':
     tickers_list = universe(NIFTY_50)
