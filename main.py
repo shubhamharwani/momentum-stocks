@@ -31,11 +31,10 @@ NIFTY_MICROCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftymi
 # definition to download the stock universe list
 def universe(link):
     # new changes
-    response = requests.get(link)
-    universe = io.StringIO(response.content.decode('utf-8'))
+    storage_optionss = {'User-Agent': 'Mozilla/5.0'}
 
     # old data
-    universe = pd.read_csv(universe)
+    universe = pd.read_csv(link, storage_options=storage_optionss)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
