@@ -1,9 +1,10 @@
 import pandas as pd
 import numpy as np
 import yfinance as yf
-import time
 import datetime as dt
 import streamlit as st
+import requests
+import io
 
 st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':zap:')
 
@@ -29,7 +30,12 @@ NIFTY_MICROCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftymi
 
 # definition to download the stock universe list
 def universe(link):
-    universe = pd.read_csv(link)
+    # new changes
+    response = requests.get(link)
+    universe = io.StringIO(response.content.decode('utf-8'))
+
+    # old data
+    universe = pd.read_csv(universe)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
@@ -40,11 +46,10 @@ universe_button = st.radio('Select Universe',('Nifty 50','Nifty Next 50','Nifty 
                                               'Nifty Small Cap 50','Nifty Small Cap 100','Nifty Small Cap 250',
                                               'Nifty Large Mid Cap 250','Nifty Mid Small Cap 400',
                                               'Nifty 500','Nifty Micro Cap 250'))
+st.write('Please have patience as downloading and calculating the data takes time.')
 
 stocks = st.number_input('Number Of Stocks',1,1000,20)
 allocation = st.number_input('Allocation In Each Stock (in ₹)',1,1000000,5000)
-
-st.write('Please have patience. Downloading and calculating the data takes time.')
 
 if universe_button == 'Nifty 50':
     tickers_list = universe(NIFTY_50)
