@@ -41,13 +41,8 @@ def universe(link):
     headers = {'User-Agent': random.choice(user_agents)}
     response = requests.get(link, headers=headers)
 
-    if response.status_code == 200:
-        data = response.content.decode('utf-8')
-    else:
-        st.write('Failed to load CSV')
-
     # old data
-    universe = pd.read_csv(data)
+    universe = pd.read_csv(response)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
