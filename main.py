@@ -9,7 +9,7 @@ import io
 
 st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':zap:')
 
-NIFTY_50 = 'https://archives.nseindia.com/content/indices/ind_nifty50list.csv'
+NIFTY_50 = r'https://archives.nseindia.com/content/indices/ind_nifty50list.csv'
 NIFTY_NEXT_50 = r'https://archives.nseindia.com/content/indices/ind_niftynext50list.csv'
 
 NIFTY_100 = r'https://archives.nseindia.com/content/indices/ind_nifty100list.csv'
