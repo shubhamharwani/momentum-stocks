@@ -38,10 +38,8 @@ def universe(link):
         st.write('Failed to load CSV')
         st.stop()
 
-    storage_optionss = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36'}
-
     # old data
-    universe = pd.read_csv(data, storage_options=storage_optionss)
+    universe = pd.read_csv(data)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
