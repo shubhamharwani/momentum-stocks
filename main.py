@@ -42,7 +42,7 @@ def universe(link):
     response = requests.get(link, headers=headers)
 
     # old data
-    universe = pd.read_csv(response)
+    universe = pd.read_csv(response.content)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
