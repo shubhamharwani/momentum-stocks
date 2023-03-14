@@ -39,8 +39,8 @@ def universe(link):
     'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
     ]
     
-    proxies = {'http': 'http://<proxy-server>:<port>',
-           'https': 'https://<proxy-server>:<port>'}
+    proxies = {'http': f'http://{proxy_server}',
+           'https': f'https://{proxy_server}'}
     
     headers = {'User-Agent': random.choice(user_agents)}
 
