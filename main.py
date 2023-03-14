@@ -4,7 +4,7 @@ import yfinance as yf
 import datetime as dt
 import streamlit as st
 import requests
-import io
+import random
 
 st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':zap:')
 
@@ -31,7 +31,16 @@ NIFTY_MICROCAP_250 = r'https://archives.nseindia.com/content/indices/ind_niftymi
 # definition to download the stock universe list
 def universe(link):
     # new changes
-    response = requests.get(link)
+    user_agents = [
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
+    'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.96 Safari/537.36'
+    ]
+    
+    headers = {'User-Agent': random.choice(user_agents)}
+    response = requests.get(link, headers=headers)
+
     if response.status_code == 200:
         data = response.content.decode('utf-8')
     else:
