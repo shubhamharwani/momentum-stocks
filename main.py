@@ -45,7 +45,6 @@ def universe(link):
         data = response.content.decode('utf-8')
     else:
         st.write('Failed to load CSV')
-        st.stop()
 
     # old data
     universe = pd.read_csv(data)
