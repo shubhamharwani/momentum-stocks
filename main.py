@@ -41,10 +41,8 @@ def universe(link):
         
     headers = {'User-Agent': random.choice(user_agents)}
     proxy_server = '14.139.242.7'
-    proxies = {'http': f'http://{proxy_server}',
-           'https': f'https://{proxy_server}'}
-
-    response = requests.get(link, headers=headers,proxies=proxies)
+    
+    response = requests.get(link, headers=headers)
 
     # old data
     universe = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
