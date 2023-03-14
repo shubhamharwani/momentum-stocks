@@ -5,6 +5,7 @@ import datetime as dt
 import streamlit as st
 import requests
 import random
+import io
 
 st.set_page_config(page_title='Momentum Rank Screener',layout='centered',page_icon=':zap:')
 
@@ -42,7 +43,7 @@ def universe(link):
     response = requests.get(link, headers=headers)
 
     # old data
-    universe = pd.read_csv(response.content)
+    universe = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
