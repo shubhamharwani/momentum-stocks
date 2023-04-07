@@ -46,8 +46,6 @@ def universe(link):
 
     # old data
     universe = pd.read_csv(io.StringIO(response.content.decode("utf-8")))
-    st.write(response.status_code)
-    st.write(universe)
     universe = universe['Symbol'] + '.NS'
     universe = universe.to_list()
     return universe
