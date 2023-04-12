@@ -110,7 +110,7 @@ col1, col2 = st.columns(2)
 with col1:
     start_date = st.date_input('Start Date',default_start_date)
 with col2:
-    end_date = st.date_input('Start Date',default_end_date)
+    end_date = st.date_input('End Date',default_end_date)
     
 with st.spinner('Please wait.'):
     #df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
