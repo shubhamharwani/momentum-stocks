@@ -103,8 +103,8 @@ if universe_button == 'Nifty 500':
 if universe_button == 'Nifty Micro Cap 250':
     tickers_list = universe(NIFTY_MICROCAP_250)
 
-default_end_date = datetime.datetime.now()
-default_start_date = default_end_date - datetime.timedelta(365)    
+default_end_date = dt.datetime.now()
+default_start_date = default_end_date - dt.timedelta(365)    
 
 col1, col2 = st.columns(2)
 with col1:
