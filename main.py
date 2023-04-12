@@ -103,11 +103,14 @@ if universe_button == 'Nifty 500':
 if universe_button == 'Nifty Micro Cap 250':
     tickers_list = universe(NIFTY_MICROCAP_250)
 
+default_end_date = datetime.datetime.now().date()
+default_start_date = default_end_date - datetime.timedelta(365)    
+
 col1, col2 = st.columns(2)
 with col1:
-    start_date = st.date_input('Start Date')
+    start_date = st.date_input('Start Date',default_start_date)
 with col2:
-    end_date = st.date_input('End Date')
+    end_date = st.date_input('Start Date',default_end_date)
     
 with st.spinner('Please wait.'):
     #df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
