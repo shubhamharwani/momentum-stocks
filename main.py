@@ -107,7 +107,8 @@ start_date = st.date_input('Start Date')
 end_date = st.date_input('Start Date')
     
 with st.spinner('Please wait.'):
-    df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
+    #df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
+    df = yf.download(tickers=tickers_list, start=start_date, end=end_date,interval='1d')
 
 # fetch prices & set date to datetime format
 prices = df['Close']
