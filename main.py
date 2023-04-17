@@ -111,10 +111,14 @@ with col1:
     start_date = st.date_input('Start Date',default_start_date)
 with col2:
     end_date = st.date_input('End Date',default_end_date)
-    
+
+button = st.button('Submit')
 with st.spinner('Please wait.'):
     #df = yf.download(tickers = tickers_list, period = "1y", interval = "1d")
-    df = yf.download(tickers=tickers_list, start=start_date, end=end_date,interval='1d')
+    if button == True:
+        df = yf.download(tickers=tickers_list, start=start_date, end=end_date,interval='1d')
+    else:
+        st.stop()
 
 # fetch prices & set date to datetime format
 prices = df['Close']
