@@ -118,7 +118,7 @@ with st.spinner('Please wait.'):
     if button == True:
         df = yf.download(tickers=tickers_list, start=start_date, end=end_date,interval='1d')
     else:
-        st.error('Error!')
+        continue
 
 # fetch prices & set date to datetime format
 prices = df['Close']
