@@ -64,5 +64,40 @@ Implementing a systematic momentum investing strategy on Indian equities typical
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/shubhamharwani/](https://github.com/shubhamharwani/)<repo-name>.git
+   git clone https://github.com/shubhamharwani/<repo-name>.git
    cd <repo-name>
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install streamlit pandas numpy yfinance requests
+   ```
+   *(Or if using a `requirements.txt` file: `pip install -r requirements.txt`)*
+
+3. **Run the application**
+   ```bash
+   streamlit run app.py
+   ```
+
+---
+
+## 🗺️ Roadmap & Planned Enhancements
+
+- [ ] **Caching & Performance:** Add `@st.cache_data` for NSE constituent lists and Yahoo Finance downloads to cut repeat query times.
+- [ ] **Risk-Adjusted Momentum:** Add volatility-adjusted momentum scores (e.g., Return / Standard Deviation or Sharpe-based ranking).
+- [ ] **Missing Data Handling:** Gracefully handle newly listed IPOs or delisted tickers with `NaN` values at the start/end of the lookback window.
+- [ ] **Portfolio Summary Metrics:** Display total capital deployed, leftover cash, and sector breakdown of the shortlisted stocks.
+
+---
+
+## ⚠️ Disclaimer
+
+This tool is built for educational and research purposes only and does not constitute financial or investment advice.
+
+---
+
+## 👤 Author
+
+**Shubham Harwani**  
+- GitHub: [@shubhamharwani](https://github.com/shubhamharwani)  
+- Twitter/X: [@oyesindhi_](https://twitter.com/oyesindhi_)
