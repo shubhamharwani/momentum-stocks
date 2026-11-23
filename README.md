@@ -1,5 +1,8 @@
 # ⚡ Momentum Rank Screener
 
+> 📦 **Part of the Momentum Investing Suite**  
+> **Part 1:** **Momentum Rank Screener** *(You are here — screen & size positions)* → **Part 2:** [Portfolio Tracker](https://github.com/shubhamharwani/<tracker-repo-name>) (Track P&L & trade metrics)
+
 A quantitative equity screening and position-sizing web app built with **Python**, **Streamlit**, and **yfinance**. It dynamically pulls constituent lists across 14 NSE broad-market indices, ranks stocks by historical price momentum, calculates equal-weight share quantities in INR, and exports actionable watchlists to CSV.
 
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
